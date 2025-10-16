@@ -1,0 +1,101 @@
+[gd_scene load_steps=17 format=3 uid="uid://bfm75psnbnksn"]
+
+[ext_resource type="Material" uid="uid://j3wq7e5ebloq" path="res://Materials/WoodFloor.tres" id="1_ig7tw"]
+[ext_resource type="ArrayMesh" uid="uid://cpj1ptxouixps" path="res://KayKit-Furniture-Bits/obj/armchair.obj" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://brb5rtyxp3ybh" path="res://KayKit-Furniture-Bits/texture/furniturebits_texture.png" id="3_7mycd"]
+[ext_resource type="Shader" uid="uid://bj2hafsjqcrgf" path="res://Materials/TransparencyFurniture.gdshader" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://ddndxfm4pwd72" path="res://Scripts/CameraControls.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://c1bbq71n026wb" path="res://Scripts/Camera.gd" id="6_7mycd"]
+[ext_resource type="Texture2D" uid="uid://c3a3qyhjhwyif" path="res://KayKit-Furniture-Bits/texture/the_sky_is_on_fire_2k.exr" id="6_272bh"]
+[ext_resource type="PackedScene" uid="uid://dc8otq6f6xm1h" path="res://Furnitures/armchair.tscn" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://dmx42mk7ho3ch" path="res://Scripts/Catalog.gd" id="9_kek77"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vw27"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_h2yge")
+shader_parameter/polka_texture = ExtResource("3_7mycd")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/opacity = 1.0
+shader_parameter/dot_size = 0.00800000038
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
+size = Vector3(3.6, 2, 3)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5vw27"]
+panorama = ExtResource("6_272bh")
+
+[sub_resource type="Sky" id="Sky_kek77"]
+sky_material = SubResource("PanoramaSkyMaterial_5vw27")
+
+[sub_resource type="Environment" id="Environment_4c57u"]
+background_mode = 2
+sky = SubResource("Sky_kek77")
+sky_rotation = Vector3(0, 1.1536627, 0)
+ambient_light_color = Color(0.306855, 0.2898514, 0.3065243, 1)
+
+[node name="main" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_ig7tw")
+surface_material_override/0 = ExtResource("1_ig7tw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.41036868, 0.9119197, 0, -0.9119197, 0.41036868, 0, 4.12572, 0)
+light_color = Color(0.954119, 0.8855511, 0.840355, 1)
+shadow_enabled = true
+
+[node name="Furniture" type="StaticBody3D" parent="." groups=["furniture"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Furniture"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = ExtResource("2_0xm2m")
+surface_material_override/0 = SubResource("ShaderMaterial_5vw27")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Furniture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_lquwl")
+
+[node name="CameraFocus" type="Node3D" parent="."]
+transform = Transform3D(0.7071067, -0.4055798, 0.5792279, 0, 0.81915206, 0.5735764, -0.7071067, -0.4055798, 0.5792279, 0, 0, 0)
+script = ExtResource("5_lquwl")
+
+[node name="Camera3D" type="Camera3D" parent="CameraFocus"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
+environment = SubResource("Environment_4c57u")
+fov = 50.0
+script = ExtResource("6_7mycd")
+
+[node name="Armchair" parent="." instance=ExtResource("8_5vw27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7315183, 0, -0.35138273)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(128, 0)
+anchors_preset = -1
+anchor_left = 0.851
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.35198975
+offset_top = 35.0
+offset_right = -44.0
+offset_bottom = -35.0
+grow_horizontal = 0
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
+script = ExtResource("9_kek77")

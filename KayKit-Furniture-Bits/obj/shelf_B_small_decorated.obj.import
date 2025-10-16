@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ccu03p38c6gao"
+path="res://.godot/imported/shelf_B_small_decorated.obj-fbc4465e6f626d4c42ad6811422b154c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/shelf_B_small_decorated.obj-fbc4465e6f626d4c42ad6811422b154c.mesh"]
+
+source_file="res://KayKit-Furniture-Bits/obj/shelf_B_small_decorated.obj"
+dest_files=["res://.godot/imported/shelf_B_small_decorated.obj-fbc4465e6f626d4c42ad6811422b154c.mesh", "res://.godot/imported/shelf_B_small_decorated.obj-fbc4465e6f626d4c42ad6811422b154c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

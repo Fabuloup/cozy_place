@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://b46ewsjv4lnhy"]
+
+[ext_resource type="Script" uid="uid://csk1vjcgujup1" path="res://Scripts/ThumbnailsGenerator.gd" id="1_215ei"]
+
+[sub_resource type="Environment" id="Environment_fpjw8"]
+background_mode = 1
+background_color = Color(0.8931516, 0.64859784, 0.6925908, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fpjw8"]
+viewport_path = NodePath("ThumbnailViewport")
+
+[node name="ThumbnailGeneratorScene" type="Node3D"]
+script = ExtResource("1_215ei")
+
+[node name="ThumbnailViewport" type="SubViewport" parent="."]
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="ThumbnailViewport"]
+transform = Transform3D(0.81915206, -0.32898995, 0.4698463, 0, 0.81915206, 0.57357645, -0.57357645, -0.46984634, 0.6710101, 4.334677, 6.61063, 6.222976)
+environment = SubResource("Environment_fpjw8")
+projection = 1
+current = true
+size = 15.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="ThumbnailViewport"]
+transform = Transform3D(0.5328763, 0.73208517, -0.42437497, 0, 0.50151074, 0.86515146, 0.84619313, -0.46101868, 0.26724324, 0, 10.031513, 0)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_fpjw8")
+stretch_mode = 5
