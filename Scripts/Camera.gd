@@ -17,7 +17,13 @@ func _input(event):
 						if(material is ShaderMaterial):
 							material.set_shader_parameter("opacity", 0.45)
 				else:
-					place_furniture()
+ 					#Check if released outside of ground
+					if not is_mouse_over_ground(event.position):
+						if selectedFurniture:
+							selectedFurniture.queue_free()
+							selectedFurniture = null
+					else:
+						place_furniture()
 				# On mouse release, toggle dragging state
 				isDragging = selectedFurniture != null and not isDragging
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP && isDragging && selectedFurniture != null:
@@ -75,3 +81,19 @@ func place_furniture():
 		selectedFurniture = null
 		isDragging = false
 		print("Furniture placed.")
+
+
+func is_mouse_over_ground(mouse_pos: Vector2) -> bool:
+	var from = get_viewport().get_camera_3d().project_ray_origin(mouse_pos)
+	var to = from + get_viewport().get_camera_3d().project_ray_normal(mouse_pos) * RAY_LENGTH
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.new()
+	query.from = from
+	query.to = to
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+
+	var result = space_state.intersect_ray(query)
+	if result:
+		return true
+	return false
