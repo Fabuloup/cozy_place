@@ -1,5 +1,6 @@
 extends Node3D
 const RAY_LENGTH = 1000.0
+const ROT_ANGLE = PI*0.05
 
 var isDragging = false
 var selectedFurniture: Node3D = null
@@ -27,9 +28,9 @@ func _input(event):
 				# On mouse release, toggle dragging state
 				isDragging = selectedFurniture != null and not isDragging
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP && isDragging && selectedFurniture != null:
-			selectedFurniture.rotate_y(0.1);
+			selectedFurniture.rotate_y(ROT_ANGLE);
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN && isDragging && selectedFurniture != null:
-			selectedFurniture.rotate_y(-0.1);
+			selectedFurniture.rotate_y(-ROT_ANGLE);
 
 
 func _physics_process(_delta):
