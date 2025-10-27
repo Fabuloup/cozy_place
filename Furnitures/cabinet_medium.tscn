@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dsfpi0c4xuysp"]
+
+[ext_resource type="ArrayMesh" uid="uid://gxbgwtfnqqkx" path="res://KayKit-Furniture-Bits/obj/cabinet_medium.obj" id="1_m4l8w"]
+[ext_resource type="Shader" uid="uid://bj2hafsjqcrgf" path="res://Materials/TransparencyFurniture.gdshader" id="2_bxvb5"]
+[ext_resource type="Texture2D" uid="uid://brb5rtyxp3ybh" path="res://KayKit-Furniture-Bits/texture/furniturebits_texture.png" id="3_6oyqt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uno2o"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_bxvb5")
+shader_parameter/polka_texture = ExtResource("3_6oyqt")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/opacity = 1.0
+shader_parameter/dot_size = 0.00800000038
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ojmxh"]
+size = Vector3(3.9560547, 2, 2.0107422)
+
+[node name="Cabinet_medium" type="StaticBody3D" groups=["furniture"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = ExtResource("1_m4l8w")
+surface_material_override/0 = SubResource("ShaderMaterial_uno2o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_ojmxh")

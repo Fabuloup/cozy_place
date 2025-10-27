@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://cpaitav0u2xc"]
+
+[ext_resource type="ArrayMesh" uid="uid://cgmpgodrjy1h6" path="res://KayKit-Furniture-Bits/obj/bed_double_A.obj" id="1_ushrh"]
+[ext_resource type="Shader" uid="uid://bj2hafsjqcrgf" path="res://Materials/TransparencyFurniture.gdshader" id="2_0vt2t"]
+[ext_resource type="Texture2D" uid="uid://brb5rtyxp3ybh" path="res://KayKit-Furniture-Bits/texture/furniturebits_texture.png" id="3_0ukr6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uno2o"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_0vt2t")
+shader_parameter/polka_texture = ExtResource("3_0ukr6")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/opacity = 1.0
+shader_parameter/dot_size = 0.00800000038
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ojmxh"]
+size = Vector3(6.044922, 1.0333252, 5.998291)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0vt2t"]
+size = Vector3(5.798828, 1.8216782, 0.60253906)
+
+[node name="Bed_double_A" type="StaticBody3D" groups=["furniture"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = ExtResource("1_ushrh")
+surface_material_override/0 = SubResource("ShaderMaterial_uno2o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5166626, 0)
+shape = SubResource("BoxShape3D_ojmxh")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9290428, -2.7030885)
+shape = SubResource("BoxShape3D_0vt2t")
